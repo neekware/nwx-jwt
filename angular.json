@@ -53,8 +53,8 @@
             }
           }
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+        "extract-jwt": {
+          "builder": "@angular-devkit/build-angular:extract-jwt",
           "options": {
             "browserTarget": "web:build"
           }
@@ -103,35 +103,35 @@
         }
       }
     },
-    "i18n": {
-      "root": "pkgs/i18n",
+    "jwt": {
+      "root": "pkgs/jwt",
       "projectType": "library",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "project": "pkgs/i18n/ng-package.json"
+            "project": "pkgs/jwt/ng-package.json"
           },
           "configurations": {
             "production": {
-              "project": "pkgs/i18n/ng-package.json"
+              "project": "pkgs/jwt/ng-package.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "pkgs/i18n/tst/test.ts",
-            "tsConfig": "pkgs/i18n/tsconfig.spec.json",
-            "karmaConfig": "pkgs/i18n/karma.conf.js"
+            "main": "pkgs/jwt/tst/test.ts",
+            "tsConfig": "pkgs/jwt/tsconfig.spec.json",
+            "karmaConfig": "pkgs/jwt/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "pkgs/i18n/tsconfig.lib.json",
-              "pkgs/i18n/tsconfig.spec.json"
+              "pkgs/jwt/tsconfig.lib.json",
+              "pkgs/jwt/tsconfig.spec.json"
             ],
             "exclude": ["**/node_modules/**"]
           }
@@ -139,5 +139,5 @@
       }
     }
   },
-  "defaultProject": "i18n"
+  "defaultProject": "jwt"
 }
