@@ -53,8 +53,8 @@
             }
           }
         },
-        "extract-jwt": {
-          "builder": "@angular-devkit/build-angular:extract-jwt",
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "web:build"
           }
