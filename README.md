@@ -16,7 +16,7 @@
 ```typescript
 // In your environment{prod,staging}.ts
 
-import { AppCfg, TargetPlatform, HttpMethod } from '@nwx/cfg';
+import { AppCfg, TargetPlatform } from '@nwx/cfg';
 import { LogLevels } from '@nwx/logger';
 
 export const environment: AppCfg = {
