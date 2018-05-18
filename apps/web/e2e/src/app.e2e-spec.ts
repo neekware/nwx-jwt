@@ -9,9 +9,6 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    setTimeout(() => {
-      // allow translation pipe to get ready
-      expect(page.getParagraphText()).toEqual('Welcome to @nwx/i18n!');
-    }, 2000);
+    expect(page.getParagraphText()).toEqual('Welcome to @nwx/i18n!');
   });
 });

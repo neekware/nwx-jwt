@@ -1,6 +1,7 @@
-SINGLETON (CORE)
+SHARED (UTILS)
 
-This module handles translation.
+This module handles Json Web Token (JWT).
 
-Default language selection
-Translation of _('any text')
+Token decode
+Payload extract
+Expiry timeout

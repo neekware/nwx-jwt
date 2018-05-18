@@ -6,11 +6,6 @@ import { CfgModule, AppCfg, CFG_OPTIONS } from '@nwx/cfg';
 import { LogModule } from '@nwx/logger';
 
 import { Observable, of as observableOf } from 'rxjs';
-import {
-  TranslateLoader,
-  TranslateModule,
-  TranslateFakeLoader
-} from '@ngx-translate/core';
 
 import { JwtModule } from 'pkgs/jwt';
 

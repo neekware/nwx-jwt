@@ -1,6 +1,6 @@
 {
   "name": "@nwx/jwt",
-  "description": "A simple translation module for Angular applications",
+  "description": "A simple JWT module for Angular applications",
   "peerDependencies": {
     "@angular/core": "^6.0.0",
     "@nwx/cfg": "^1.0.0",

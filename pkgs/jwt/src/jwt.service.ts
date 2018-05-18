@@ -20,7 +20,7 @@ import { JwtModule } from './jwt.module';
  * An injectable class that handles JWT service
  */
 @Injectable({
-  providedIn: JwtModule
+  providedIn: 'root'
 })
 export class JwtService {
   private options: AppCfg = null;

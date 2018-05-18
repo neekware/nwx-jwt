@@ -1,6 +1,6 @@
-# @nwx/i18n
+# @nwx/jwt
 
-**A simple translation module for Angular applications**
+**A simple jwt module for Angular applications**
 
 [![status-image]][status-link]
 [![version-image]][version-link]
@@ -9,7 +9,7 @@
 
 # How to install
 
-    npm i @nwx/i18n |OR| yarn add @nwx/i18n
+    npm i @nwx/jwt |OR| yarn add @nwx/jwt
 
 # How to use
 
@@ -21,41 +21,20 @@ import { LogLevels } from '@nwx/logger';
 
 export const environment: AppCfg = {
   // app name
-  appName: 'Neekware',
+  appName: '@nwx/jwt',
   // target (browser, mobile, desktop)
   target: TargetPlatform.web,
   // production, staging or development
   production: false,
-  // one or more app specific field(s)
   log: {
-    // Log level, (default = none)
-    level: LogLevels.info
+    // log level (application-wide)
+    level: LogLevels.debug
   },
-  i18n: {
-    // available languages
-    availableLanguages: {
-      en: {
-        name: 'English',
-        locale: '@angular/common/locales/en',
-        localeExtra: '@angular/common/locales/extra/en'
-      },
-      fr: {
-        name: 'Français',
-        locale: '@angular/common/locales/fr',
-        localeExtra: '@angular/common/locales/extra/fr'
-      },
-      de: {
-        name: 'Deutsch',
-        locale: '@angular/common/locales/de',
-        localeExtra: '@angular/common/locales/extra/de'
-      }
-    },
-    // enabled languages (iso list)
-    enabledLanguages: [
-      // order is important
-      'en',
-      'fr'
-    ]
+  jwt: {
+    // estimate time of http request between client -> server (greater than zero)
+    networkDelay: 1,
+    // few seconds to make the randomizer work. backend can overwrite
+    expiryLeeway: 5
   }
 };
 ```
@@ -65,6 +44,7 @@ export const environment: AppCfg = {
 
 import { CfgModule } from '@nwx/cfg';
 import { LoggerModule } from '@nwx/logger';
+import { JwtModule } from '@nwx/jwt';
 
 import { environment } from '../environments/environment';
 
@@ -74,7 +54,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     CfgModule.forRoot(environment), // make the environment injectable
     LoggerModule,
-    I18nModule.forRoot()
+    JwtModule
   ],
   bootstrap: [AppComponent]
 })
@@ -83,101 +63,46 @@ export class AppModule {}
 
 ```typescript
 // In your app.module.ts
+
 import { Component } from '@angular/core';
 import { CfgService, DefaultCfg } from '@nwx/cfg';
 import { LogService } from '@nwx/logger';
-import { I18nService } from '@nwx/i18n';
+import { jwtService } from '@nwx/jwt';
 
 @Component({
   selector: 'app-root',
-  template: `<h1>{{'COMMON.WELCOME' | translate}} to {{ title }}!</h1>`
+  template: `<h1>Welcome to {{ title }}!</h1>`
 })
 export class AppComponent {
   title = 'Neekware';
-  constructor(public cfg: CfgService, public log: LogService, public i18n: I18nService) {
+  options = {};
+  constructor(public cfg: CfgService, public log: LogService, public jwt: JwtService) {
     this.title = this.cfg.options.appName;
     this.log.info('AppComponent loaded ...');
-  }
-}
-```
 
-Include your translated files in the `/assets/i18n` directory of your application.
-
-`/assets/i18n/en.json`
-
-```json
-{
-  "COMMON.WELCOME": "Welcome",
-  "COMMON.ABOUT": "About"
-}
-```
-
-`/assets/i18n/fr.json`
-
-```json
-{
-  "COMMON.WELCOME": "Bienvenue",
-  "COMMON.ABOUT": "Sur"
-}
-```
-
-# Advanced usage:
-
-```typescript
-// In your app.module.ts
-import { Component } from '@angular/core';
-import { CfgService, DefaultCfg } from '@nwx/cfg';
-import { LogService } from '@nwx/logger';
-import { I18nService } from '@nwx/i18n';
-
-@Component({
-  selector: 'app-root',
-  template: `<h1>{{'COMMON.WELCOME' | translate}} to {{ title }}!</h1>`
-})
-export class AppComponent {
-  direction = 'ltr';
-  title = 'Neekware';
-  constructor(public cfg: CfgService, public log: LogService, public i18n: I18nService) {
-    this.title = this.cfg.options.appName;
-
-    // translate in ts files
-    i18n.xlate.get('COMMON.WELCOME').subscribe((res: string) => {
-      this.log.info(res);
-    });
-
-    // check if language is Right2Left `rtl`
-    if (i18n.isLanguageRTL('he')) {
-      this.direction = 'rtl';
+    const someToken = 'asfasfasfasf.dfghdfghfdgh.ffghjfghjfghj';
+    const payload = this.jwt.getPayload(someToken);
+    const isExpired = this.jwt.isExpired(payload);
+    if (!isExpired) {
+      const userId = payload.sub;
+      const nextRefresh = this.jwt.getRefreshTime(payload);
+      setTimeout(() => {
+        // connect to sever to get a new token
+      }, nextRefresh * 1000);
     }
-
-    // change the language
-    i18n.setCurrentLanguage('fr');
-
-    // other available methods
-    // currentLanguage()
-    // defaultLanguage()
-    // enabledLanguages()
-    // isCurrentLanguage(iso)
-    // getLanguageName(iso)
-    // getLanguageDirection(iso)
-    // isLanguageEnabled(iso)
   }
 }
 ```
-
-# Note:
-
-1.  `@nwx/i18n` uses the great `@ngx-translate` package under the hood.
 
 # Running the tests
 
 To run the tests against the current environment:
 
-    npm run ci
+    npm run ci:all
 
 # License
 
-Released under a ([MIT](https://github.com/neekware/nwx-i18n/blob/master/LICENSE)) license.
+Released under a ([MIT](https://github.com/neekware/nwx-jwt/blob/master/LICENSE)) license.
 
 # Version
 
@@ -187,11 +112,11 @@ X.Y.Z Version
     `MINOR` version -- adding functionality in a backwards-compatible manner
     `PATCH` version -- making backwards-compatible bug fixes
 
-[status-image]: https://secure.travis-ci.org/neekware/nwx-i18n.png?branch=master
-[status-link]: http://travis-ci.org/neekware/nwx-i18n?branch=master
-[version-image]: https://img.shields.io/npm/v/@nwx/i18n.svg
-[version-link]: https://www.npmjs.com/package/@nwx/i18n
-[coverage-image]: https://coveralls.io/repos/neekware/nwx-i18n/badge.svg
-[coverage-link]: https://coveralls.io/r/neekware/nwx-i18n
-[download-image]: https://img.shields.io/npm/dm/@nwx/i18n.svg
-[download-link]: https://www.npmjs.com/package/@nwx/i18n
+[status-image]: https://secure.travis-ci.org/neekware/nwx-jwt.png?branch=master
+[status-link]: http://travis-ci.org/neekware/nwx-jwt?branch=master
+[version-image]: https://img.shields.io/npm/v/@nwx/jwt.svg
+[version-link]: https://www.npmjs.com/package/@nwx/jwt
+[coverage-image]: https://coveralls.io/repos/neekware/nwx-jwt/badge.svg
+[coverage-link]: https://coveralls.io/r/neekware/nwx-jwt
+[download-image]: https://img.shields.io/npm/dm/@nwx/jwt.svg
+[download-link]: https://www.npmjs.com/package/@nwx/jwt
