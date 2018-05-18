@@ -57,7 +57,7 @@ async function buildPackage() {
     const cmd = `ng build --prod`;
     console.log(cmd);
     await execute(cmd).catch(error => {
-      console.log(`Failed to build @nwx/i18n ... ${error}`);
+      console.log(`Failed to build @nwx/jwt ... ${error}`);
       return false;
     });
   }

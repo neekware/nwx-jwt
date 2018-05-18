@@ -3,7 +3,7 @@ import { LogLevels } from '@nwx/logger';
 
 export const environment: AppCfg = {
   // app name
-  appName: '@nwx/i18n',
+  appName: '@nwx/jwt',
   // target (browser, mobile, desktop)
   target: TargetPlatform.web,
   // production, staging or development
