@@ -11,7 +11,7 @@ import { JwtCfg } from './jwt.types';
 /**
  * Default configuration - JWT module
  */
-export const JwtCfgDefault: JwtCfg = {
+export const DefaultJwtCfg: JwtCfg = {
   // default of 1 second. frontend specific
   networkDelay: 1,
   // few seconds to make the randomizer work. backend can overwrite

@@ -7,16 +7,11 @@ import { LogModule } from '@nwx/logger';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 
-import { I18nModule } from 'pkgs/i18n';
+import { JwtModule } from 'pkgs/jwt';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    CfgModule.forRoot(environment),
-    LogModule,
-    I18nModule.forRoot()
-  ],
+  imports: [BrowserModule, CfgModule.forRoot(environment), LogModule, JwtModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

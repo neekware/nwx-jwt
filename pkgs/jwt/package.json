@@ -1,5 +1,5 @@
 {
-  "name": "@nwx/i18n",
+  "name": "@nwx/jwt",
   "description": "A simple translation module for Angular applications",
   "peerDependencies": {
     "@angular/core": "^6.0.0",

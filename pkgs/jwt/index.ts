@@ -6,7 +6,7 @@
  * found in the LICENSE file at http://neekware.com/license/MIT.html
  */
 
-export { I18nCfg, _ } from './src/i18n.types';
-export { DefaultI18nCfg } from './src/i18n.defaults';
-export { I18nModule } from './src/i18n.module';
-export { I18nService } from './src/i18n.service';
+export { JwtCfg } from './src/jwt.types';
+export { DefaultJwtCfg } from './src/jwt.defaults';
+export { JwtModule } from './src/jwt.module';
+export { JwtService } from './src/jwt.service';

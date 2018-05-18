@@ -6,7 +6,7 @@ import { resolve } from 'path';
 import * as program from 'commander';
 import { parse, SemVer } from 'semver';
 
-const projName = 'nwx-i18n';
+const projName = 'nwx-jwt';
 const projDir = resolve(__dirname, '..');
 const porjPkgJson = require(path.join(projDir, 'package.json'));
 const moduleBuildPath = path.join(projDir, 'builds', projName);
@@ -111,9 +111,9 @@ async function main() {
 
 program
   .version('0.0.1', '-v, --version')
-  .option('-b, --build', 'Build @nwx/i18n')
-  .option('-p, --publish', 'Publish @nwx/i18n@latest')
-  .option('-d, --dev', 'Publish @nwx/i18n@next')
+  .option('-b, --build', 'Build @nwx/jwt')
+  .option('-p, --publish', 'Publish @nwx/jwt@latest')
+  .option('-d, --dev', 'Publish @nwx/jwt@dev')
   .parse(process.argv);
 
 main();

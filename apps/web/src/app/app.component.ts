@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { CfgService, DefaultCfg } from '@nwx/cfg';
 import { LogService } from '@nwx/logger';
 
-import { I18nService } from 'pkgs/i18n';
+import { JwtService } from 'pkgs/jwt';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ import { I18nService } from 'pkgs/i18n';
 export class AppComponent {
   title = 'Neekware';
   options = {};
-  constructor(public cfg: CfgService, public log: LogService, public i18n: I18nService) {
+  constructor(public cfg: CfgService, public log: LogService, public jwt: JwtService) {
     this.title = this.cfg.options.appName;
     this.log.info('AppComponent loaded ...');
   }

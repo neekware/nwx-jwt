@@ -13,7 +13,7 @@ import { Base64 } from 'js-base64';
 import { CfgService, AppCfg } from '@nwx/cfg';
 import { LogService } from '@nwx/logger';
 
-import { JwtCfgDefault } from './jwt.defaults';
+import { DefaultJwtCfg } from './jwt.defaults';
 import { JwtModule } from './jwt.module';
 
 /**
@@ -30,7 +30,7 @@ export class JwtService {
    * @param options an optional configuration object
    */
   constructor(private cfg: CfgService, private log: LogService) {
-    this.options = { jwt: { ...JwtCfgDefault }, ...cfg.options };
+    this.options = { jwt: { ...DefaultJwtCfg }, ...cfg.options };
     this.log.debug('JwtService ready ...');
   }
 
