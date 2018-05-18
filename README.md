@@ -1,6 +1,6 @@
 # @nwx/jwt
 
-**A simple jwt module for Angular applications**
+**A simple JWT module for Angular applications**
 
 [![status-image]][status-link]
 [![version-image]][version-link]
@@ -87,7 +87,7 @@ export class AppComponent {
       const userId = payload.sub;
       const nextRefresh = this.jwt.getRefreshTime(payload);
       setTimeout(() => {
-        // connect to sever to get a new token
+        // connect to the server to get a new token
       }, nextRefresh * 1000);
     }
   }
