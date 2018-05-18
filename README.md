@@ -80,7 +80,7 @@ export class AppComponent {
     this.title = this.cfg.options.appName;
     this.log.info('AppComponent loaded ...');
 
-    const someToken = 'asfasfasfasf.dfghdfghfdgh.ffghjfghjfghj';
+    const someToken = 'some-jwt-token-received-from-server'; // <part-1>.<part-2>.<part-2>
     const payload = this.jwt.getPayload(someToken);
     const isExpired = this.jwt.isExpired(payload);
     if (!isExpired) {
