@@ -105,7 +105,11 @@ export class JwtService {
     if (typeof payload === 'string') {
       payload = this.getPayload(payload);
     }
-    const leeway = get(payload, 'lee', this.options.jwt.expiryLeeway);
+    const leeway = get(
+      payload,
+      'leeway',
+      get(payload, 'lee', this.options.jwt.expiryLeeway)
+    );
     const range = {
       lower: 1,
       upper: leeway - this.options.jwt.networkDelay || 2
