@@ -1,3 +1,9 @@
+## 1.0.1
+
+Enhancements:
+
+  - Support for both `lee` and `leeway`
+
 ## 1.0.0
 
 Enhancements:
