@@ -85,6 +85,26 @@ describe('JwtService', () => {
   );
 
   it(
+    'should verify expiry on a null token',
+    inject([JwtService], (service: JwtService) => {
+      const token = null;
+      const payload = service.getPayload(token);
+      const isExpired = service.isExpired(payload);
+      expect(isExpired).toBe(true);
+    })
+  );
+
+  it(
+    'should verify expiry on a token with missing parts',
+    inject([JwtService], (service: JwtService) => {
+      const token = 'part1.part2';
+      const payload = service.getPayload(token);
+      const isExpired = service.isExpired(payload);
+      expect(isExpired).toBe(true);
+    })
+  );
+
+  it(
     'should verify refresh time on a valid token',
     inject([JwtService], (service: JwtService) => {
       const token = validToken();
