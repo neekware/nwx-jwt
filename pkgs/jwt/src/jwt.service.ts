@@ -40,18 +40,26 @@ export class JwtService {
    * @returns a payload object or null if decode fails
    */
   getPayload(token: string): any {
-    const parts = token.split('.');
-    if (parts.length !== 3) {
-      this.log.error('JWT must have 3 parts');
-    } else {
-      try {
-        const decoded = Base64.decode(parts[1]);
-        const payload = JSON.parse(decoded);
-        return payload;
-      } catch (e) {
-        this.log.error('Cannot decode the token');
+    let parts = [];
+
+    try {
+      parts = token.split('.');
+      if (parts.length !== 3) {
+        throw Error('JWT must have 3 parts');
       }
+    } catch (e) {
+      this.log.error(e.message);
+      return null;
     }
+
+    try {
+      const decoded = Base64.decode(parts[1]);
+      const payload = JSON.parse(decoded);
+      return payload;
+    } catch (e) {
+      this.log.error('Cannot decode the token');
+    }
+
     return null;
   }
 
@@ -71,7 +79,7 @@ export class JwtService {
       const expired = now > expiry + offset;
       return expired;
     }
-    return false;
+    return true;
   }
 
   /**
