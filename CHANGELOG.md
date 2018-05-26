@@ -1,3 +1,9 @@
+## 1.0.2
+
+Bugfix:
+
+  - Empty or invalid token is considered expired
+
 ## 1.0.1
 
 Enhancements:
