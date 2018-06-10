@@ -8,7 +8,7 @@
 
 import { Injectable } from '@angular/core';
 
-import { get } from 'lodash';
+import { get, merge } from 'lodash';
 import { Base64 } from 'js-base64';
 import { CfgService, AppCfg } from '@nwx/cfg';
 import { LogService } from '@nwx/logger';
@@ -23,14 +23,14 @@ import { JwtModule } from './jwt.module';
   providedIn: 'root'
 })
 export class JwtService {
-  private options: AppCfg = null;
+  private _options: AppCfg = null;
 
   /**
    * Class constructor
    * @param options an optional configuration object
    */
   constructor(private cfg: CfgService, private log: LogService) {
-    this.options = { jwt: { ...DefaultJwtCfg }, ...cfg.options };
+    this._options = merge({ jwt: DefaultJwtCfg }, cfg.options);
     this.log.debug('JwtService ready ...');
   }
 
@@ -73,7 +73,7 @@ export class JwtService {
       payload = this.getPayload(payload);
     }
     if (payload) {
-      const offset = (parseInt(payload.lee, 10) || this.options.jwt.expiryLeeway) * 1000;
+      const offset = (parseInt(payload.lee, 10) || this._options.jwt.expiryLeeway) * 1000;
       const now = this.utcSeconds();
       const expiry = this.utcSeconds(payload.exp);
       const expired = now > expiry + offset;
@@ -116,11 +116,11 @@ export class JwtService {
     const leeway = get(
       payload,
       'leeway',
-      get(payload, 'lee', this.options.jwt.expiryLeeway)
+      get(payload, 'lee', this._options.jwt.expiryLeeway)
     );
     const range = {
       lower: 1,
-      upper: leeway - this.options.jwt.networkDelay || 2
+      upper: leeway - this._options.jwt.networkDelay || 2
     };
     return Math.floor(Math.random() * range.upper + range.lower);
   }
@@ -132,5 +132,9 @@ export class JwtService {
    */
   private utcSeconds(input?: number): number {
     return input ? new Date(0).setUTCSeconds(input).valueOf() : new Date().valueOf();
+  }
+
+  get options() {
+    return this._options;
   }
 }

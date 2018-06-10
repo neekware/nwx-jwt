@@ -3,8 +3,9 @@
   "description": "A simple JWT module for Angular applications",
   "peerDependencies": {
     "@angular/core": "^6.0.0",
-    "@nwx/cfg": "^1.0.0",
-    "@nwx/logger": "^1.0.1",
+    "lodash": "^4.17.5",
+    "@nwx/cfg": "^1.0.3",
+    "@nwx/logger": "^1.0.3",
     "js-base64": "^2.4.3"
   }
 }

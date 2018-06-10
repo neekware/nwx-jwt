@@ -59,6 +59,13 @@ describe('JwtService', () => {
   });
 
   it(
+    'should be created with default values',
+    inject([JwtService], (service: JwtService) => {
+      expect(service.options.jwt.networkDelay).toBe(1);
+    })
+  );
+
+  it(
     'should be created',
     inject([JwtService], (service: JwtService) => {
       expect(service).toBeTruthy();
