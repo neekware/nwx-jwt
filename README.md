@@ -2,6 +2,9 @@
 
 **A simple JWT module for Angular applications**
 
+# Library was deprecated in favor of [`@fullerstack/ngx-jwt`](https://github.com/neekware/fullerstack/tree/main/libs/ngx-jwt)
+
+
 [![status-image]][status-link]
 [![version-image]][version-link]
 [![coverage-image]][coverage-link]
@@ -120,3 +123,7 @@ X.Y.Z Version
 [coverage-link]: https://coveralls.io/r/neekware/nwx-jwt
 [download-image]: https://img.shields.io/npm/dm/@nwx/jwt.svg
 [download-link]: https://www.npmjs.com/package/@nwx/jwt
+
+# Sponsors
+
+[Neekware Inc.](https://github.com/neekware)
