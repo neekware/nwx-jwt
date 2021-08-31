@@ -1,9 +1,8 @@
+# Library was deprecated in favor of [`@fullerstack/ngx-jwt`](https://github.com/neekware/fullerstack/tree/main/libs/ngx-jwt)
+
 # @nwx/jwt
 
 **A simple JWT module for Angular applications**
-
-# Library was deprecated in favor of [`@fullerstack/ngx-jwt`](https://github.com/neekware/fullerstack/tree/main/libs/ngx-jwt)
-
 
 [![status-image]][status-link]
 [![version-image]][version-link]
